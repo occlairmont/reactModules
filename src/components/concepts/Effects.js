@@ -32,6 +32,7 @@ export default Effects;
 
 const SampleEffect = () => {
   const [timerRunning, setTimerRunning] = useState(false);
+
   useEffect(() => {
     let timer;
     if (timerRunning) {
@@ -42,9 +43,24 @@ const SampleEffect = () => {
     }
     return () => {
       window.clearTimeout(timer);
-      console.log("the time was cleaned up", Date.now() / 1000);
-    };
+      console.log("the time was cleaned up", Date.now() / 1000)}
   });
+
+  // useEffect(() => {
+  //   let timer;
+  //   if (timerRunning) {
+  //     timer = window.setTimeout(() => {
+  //       console.log('the timer expired', Date.now()/1000);
+  //       setTimerRunning(false);
+  //     }, 2000)
+  //   }
+  //   return () => {window.clearTimeout(timer); console.log('the timer was cleaned up', Date.now()/1000)}
+  // })
+
+  useEffect(() => {
+    console.log('The state has been changed');
+  }, [timerRunning])
+
   let buttonHandler = () => {
     if (!timerRunning) {
       setTimerRunning(true);
